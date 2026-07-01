@@ -409,71 +409,6 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
-      {/* SP4N-LAPOR! GOVERNMENT COMPLAINT BANNER - REDESIGNED TO OFFICIAL GOVERNMENT THEME */}
-      <div className="bg-[#f5f6f8] text-slate-800 border-y border-slate-200 shadow-sm relative overflow-hidden">
-        {/* Top decorative red-and-white strip resembling national colors */}
-        <div className="h-1 bg-gradient-to-r from-red-600 to-red-700 w-full"></div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6 flex flex-col lg:flex-row items-center justify-between gap-6">
-          <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 lg:max-w-4xl">
-            {/* Official LAPOR! Banner Box */}
-            <div className="bg-[#c21820] px-4 py-2 rounded-xl shadow-sm border border-red-800/20 flex items-center shrink-0 w-64 sm:w-72 h-16 sm:h-20 transition-all hover:shadow-md">
-              <img 
-                src="https://upload.wikimedia.org/wikipedia/commons/e/e6/Logo_LAPOR%21.png" 
-                alt="Logo SP4N LAPOR!" 
-                className="h-10 sm:h-12 w-auto object-contain shrink-0" 
-                referrerPolicy="no-referrer"
-              />
-              <div className="w-[1.5px] h-10 sm:h-12 bg-white/30 mx-3 shrink-0" />
-              <div className="text-white font-sans text-left shrink-0">
-                <p className="text-[7px] sm:text-[8px] font-extrabold tracking-wider leading-tight">SISTEM PENGELOLAAN</p>
-                <p className="text-[7px] sm:text-[8px] font-extrabold tracking-wider leading-tight">PENGADUAN PELAYANAN</p>
-                <p className="text-[7px] sm:text-[8px] font-extrabold tracking-wider leading-tight">PUBLIK NASIONAL</p>
-              </div>
-            </div>
-            <div className="space-y-1 mt-1 sm:mt-0">
-              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-                <span className="bg-red-600 text-white font-mono text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">
-                  SP4N-LAPOR!
-                </span>
-                <span className="bg-slate-200 text-slate-700 font-sans text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">
-                  KemenPANRB • RI
-                </span>
-              </div>
-              <h4 className="font-sans font-extrabold text-sm sm:text-base text-slate-900 tracking-tight leading-snug flex items-center justify-center sm:justify-start gap-1.5">
-                <Shield className="w-4.5 h-4.5 text-red-600 shrink-0 inline" /> Layanan Aspirasi & Pengaduan Online Rakyat
-              </h4>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Layanan pengaduan nasional terintegrasi (SP4N). Sampaikan kritik, saran, perundungan, atau pungli untuk mewujudkan lingkungan pendidikan SD Negeri 8 Wonogiri yang bersih, transparan, dan berintegritas.
-              </p>
-            </div>
-          </div>
-          
-          <div className="flex flex-row sm:flex-row items-center gap-2.5 shrink-0 w-full sm:w-auto justify-center">
-            <button
-              onClick={() => {
-                setIsOpenLapor(true);
-                setSubmissionSuccess(false);
-              }}
-              className="flex-1 sm:flex-initial bg-red-600 hover:bg-red-700 text-white text-xs font-bold uppercase px-4 py-2.5 rounded-lg shadow-sm hover:shadow transition-all inline-flex items-center justify-center gap-2"
-            >
-              <MessageSquare className="w-4 h-4" />
-              <span>Sampaikan Aduan</span>
-            </button>
-            <a
-              href="https://www.lapor.go.id"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 sm:flex-initial bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 text-xs font-bold uppercase px-4 py-2.5 rounded-lg transition-all inline-flex items-center justify-center gap-1.5 shadow-xs"
-              title="Kunjungi website resmi SP4N-LAPOR!"
-            >
-              <span>lapor.go.id</span>
-              <Globe className="w-3.5 h-3.5 text-slate-500" />
-            </a>
-          </div>
-        </div>
-      </div>
-
       {/* Main Footer Content - REDESIGNED to be high-density and compact */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -536,82 +471,53 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Column 2: Tautan Cepat */}
-          <div>
-            <h4 className="text-white font-bold text-xs tracking-wider uppercase border-b border-emerald-900 pb-1.5 mb-2.5">
-              Tautan Utama
-            </h4>
-            <ul className="space-y-1.5 text-xs">
-              <li>
-                <a href="/index.html" className="hover:text-amber-400 transition-colors flex items-center py-0.5">
-                  <ArrowRight className="w-3.5 h-3.5 mr-1 text-emerald-600 shrink-0" />
-                  Beranda Utama
-                </a>
-              </li>
-              <li>
-                <a href="/profil.html" className="hover:text-amber-400 transition-colors flex items-center py-0.5">
-                  <ArrowRight className="w-3.5 h-3.5 mr-1 text-emerald-600 shrink-0" />
-                  Profil & Guru
-                </a>
-              </li>
-              <li>
-                <a href="/kegiatan.html" className="hover:text-amber-400 transition-colors flex items-center py-0.5">
-                  <ArrowRight className="w-3.5 h-3.5 mr-1 text-emerald-600 shrink-0" />
-                  Aktivitas Sekolah
-                </a>
-              </li>
-              <li>
-                <a href="/prestasi.html" className="hover:text-amber-400 transition-colors flex items-center py-0.5">
-                  <ArrowRight className="w-3.5 h-3.5 mr-1 text-emerald-600 shrink-0" />
-                  Prestasi Siswa
-                </a>
-              </li>
-              <li>
-                <a href="/inovasi.html" className="hover:text-amber-400 transition-colors flex items-center py-0.5">
-                  <ArrowRight className="w-3.5 h-3.5 mr-1 text-emerald-600 shrink-0" />
-                  Inovasi Unggulan
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 3: Publikasi & Informasi */}
-          <div>
-            <h4 className="text-white font-bold text-xs tracking-wider uppercase border-b border-emerald-900 pb-1.5 mb-2.5">
-              Transparansi & Layanan
-            </h4>
-            <ul className="space-y-1.5 text-xs">
-              <li>
-                <a href="/berita.html" className="hover:text-amber-400 transition-colors flex items-center py-0.5">
-                  <ArrowRight className="w-3.5 h-3.5 mr-1 text-emerald-600 shrink-0" />
-                  Berita & Kabar
-                </a>
-              </li>
-              <li>
-                <a href="/galeri.html" className="hover:text-amber-400 transition-colors flex items-center py-0.5">
-                  <ArrowRight className="w-3.5 h-3.5 mr-1 text-emerald-600 shrink-0" />
-                  Galeri Foto Media
-                </a>
-              </li>
-              <li>
-                <a href="/transparansi.html" className="hover:text-amber-400 transition-colors flex items-center py-0.5">
-                  <ArrowRight className="w-3.5 h-3.5 mr-1 text-emerald-600 shrink-0" />
-                  Rencana RKAS & BOS
-                </a>
-              </li>
-              <li>
-                <a href="/layanan-publik.html" className="hover:text-amber-400 transition-colors flex items-center py-0.5">
-                  <ArrowRight className="w-3.5 h-3.5 mr-1 text-emerald-600 shrink-0" />
-                  Layanan Publik SIPPN
-                </a>
-              </li>
-              <li>
-                <a href="/spmb.html" className="hover:text-amber-400 transition-colors flex items-center font-bold text-amber-500 py-0.5">
-                  <ArrowRight className="w-3.5 h-3.5 mr-1 text-amber-500 shrink-0" />
-                  Penerimaan Siswa Baru
-                </a>
-              </li>
-            </ul>
+          {/* Column 2: Official SP4N-LAPOR! Banner */}
+          <div className="md:col-span-2 lg:col-span-2">
+            <div className="bg-gradient-to-br from-[#f5f6f8] to-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm h-full flex flex-col">
+              <div className="h-1 bg-gradient-to-r from-red-600 to-red-700 w-full"></div>
+              <div className="p-4 sm:p-5 flex flex-col items-center text-center space-y-3 flex-grow">
+                <div className="flex items-center gap-3">
+                  <img 
+                    src="https://www.lapor.go.id/themes/lapor/assets/images/logo.png" 
+                    alt="Logo SP4N LAPOR!" 
+                    className="h-10 sm:h-12 w-auto object-contain"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="w-px h-8 bg-slate-300"></div>
+                  <div className="text-left">
+                    <p className="text-[9px] font-extrabold text-slate-800 uppercase tracking-wider leading-tight">SP4N-LAPOR!</p>
+                    <p className="text-[9px] font-bold text-slate-600 uppercase tracking-wider">KemenPANRB • RI</p>
+                  </div>
+                </div>
+                <h4 className="font-sans font-extrabold text-xs sm:text-sm text-slate-900 tracking-tight flex items-center gap-1.5">
+                  <Shield className="w-4 h-4 text-red-600 shrink-0" /> Layanan Aspirasi & Pengaduan Online Rakyat
+                </h4>
+                <p className="text-[10px] sm:text-xs text-slate-600 leading-relaxed line-clamp-2">
+                  Layanan pengaduan nasional terintegrasi (SP4N). Sampaikan kritik, saran, perundungan, atau pungli untuk mewujudkan lingkungan pendidikan SD Negeri 8 Wonogiri yang bersih, transparan, dan berintegritas.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-2 pt-1 w-full">
+                  <button
+                    onClick={() => {
+                      setIsOpenLapor(true);
+                      setSubmissionSuccess(false);
+                    }}
+                    className="flex-1 inline-flex items-center justify-center gap-1.5 bg-red-600 hover:bg-red-700 text-white text-[10px] font-bold uppercase px-3 py-2 rounded-lg shadow-sm transition-all"
+                  >
+                    <MessageSquare className="w-3.5 h-3.5" />
+                    <span>Sampaikan Aduan</span>
+                  </button>
+                  <a
+                    href="https://www.lapor.go.id"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 inline-flex items-center justify-center gap-1.5 bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 text-[10px] font-bold uppercase px-3 py-2 rounded-lg transition-all"
+                  >
+                    <span>lapor.go.id</span>
+                    <Globe className="w-3.5 h-3.5 text-slate-500" />
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Column 4: Lokasi Kontak */}

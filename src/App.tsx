@@ -16,7 +16,8 @@ import {
   SCHOOL_CONFIG as RAW_SCHOOL_CONFIG, HERO_SLIDES as RAW_HERO_SLIDES, MOTIVATION_QUOTE as RAW_MOTIVATION_QUOTE, QUICK_MENU_ITEMS,
   VISION_MISSION as RAW_VISION_MISSION, TEACHERS as RAW_TEACHERS, FACILITIES as RAW_FACILITIES, INNOVATIONS as RAW_INNOVATIONS, NEWS_ITEMS as RAW_NEWS_ITEMS,
   ACHIEVEMENTS as RAW_ACHIEVEMENTS, ACTIVITIES as RAW_ACTIVITIES, GALLERY_ITEMS as RAW_GALLERY_ITEMS, TRANSPARENCY_DOCS as RAW_TRANSPARENCY_DOCS, FAQS,
-  NewsItem, Achievement, GalleryItem, TransparencyDoc, PublicServiceSop, RAW_PUBLIC_SERVICES
+  NewsItem, Achievement, GalleryItem, TransparencyDoc, PublicServiceSop, RAW_PUBLIC_SERVICES,
+  Teacher, Facility, Innovation, Activity, Quote, HeroSlide
 } from './data/schoolData';
 import { 
   BookOpen, Calendar, User, ArrowRight, Trophy, Download, 
@@ -36,51 +37,51 @@ export default function App() {
   const [isAdminOpen, setIsAdminOpen] = useState(false);
 
   // Reactive state for school CMS data, initialized from localStorage if edited
-  const [SCHOOL_CONFIG, setSchoolConfig] = useState(() => {
+  const [SCHOOL_CONFIG, setSchoolConfig] = useState<typeof RAW_SCHOOL_CONFIG>(() => {
     const saved = localStorage.getItem('school_config');
     return saved ? JSON.parse(saved) : RAW_SCHOOL_CONFIG;
   });
-  const [HERO_SLIDES, setHeroSlides] = useState(() => {
+  const [HERO_SLIDES, setHeroSlides] = useState<HeroSlide[]>(() => {
     const saved = localStorage.getItem('hero_slides');
     return saved ? JSON.parse(saved) : RAW_HERO_SLIDES;
   });
-  const [MOTIVATION_QUOTE, setMotivationQuote] = useState(() => {
+  const [MOTIVATION_QUOTE, setMotivationQuote] = useState<Quote>(() => {
     const saved = localStorage.getItem('motivation_quote');
     return saved ? JSON.parse(saved) : RAW_MOTIVATION_QUOTE;
   });
-  const [VISION_MISSION, setVisionMission] = useState(() => {
+  const [VISION_MISSION, setVisionMission] = useState<typeof RAW_VISION_MISSION>(() => {
     const saved = localStorage.getItem('vision_mission');
     return saved ? JSON.parse(saved) : RAW_VISION_MISSION;
   });
-  const [TEACHERS, setTeachers] = useState(() => {
+  const [TEACHERS, setTeachers] = useState<Teacher[]>(() => {
     const saved = localStorage.getItem('teachers');
     return saved ? JSON.parse(saved) : RAW_TEACHERS;
   });
-  const [FACILITIES, setFacilities] = useState(() => {
+  const [FACILITIES, setFacilities] = useState<Facility[]>(() => {
     const saved = localStorage.getItem('facilities');
     return saved ? JSON.parse(saved) : RAW_FACILITIES;
   });
-  const [INNOVATIONS, setInnovations] = useState(() => {
+  const [INNOVATIONS, setInnovations] = useState<Innovation[]>(() => {
     const saved = localStorage.getItem('innovations');
     return saved ? JSON.parse(saved) : RAW_INNOVATIONS;
   });
-  const [NEWS_ITEMS, setNewsItems] = useState(() => {
+  const [NEWS_ITEMS, setNewsItems] = useState<NewsItem[]>(() => {
     const saved = localStorage.getItem('news_items');
     return saved ? JSON.parse(saved) : RAW_NEWS_ITEMS;
   });
-  const [ACHIEVEMENTS, setAchievements] = useState(() => {
+  const [ACHIEVEMENTS, setAchievements] = useState<Achievement[]>(() => {
     const saved = localStorage.getItem('achievements');
     return saved ? JSON.parse(saved) : RAW_ACHIEVEMENTS;
   });
-  const [ACTIVITIES, setActivities] = useState(() => {
+  const [ACTIVITIES, setActivities] = useState<Activity[]>(() => {
     const saved = localStorage.getItem('activities');
     return saved ? JSON.parse(saved) : RAW_ACTIVITIES;
   });
-  const [GALLERY_ITEMS, setGalleryItems] = useState(() => {
+  const [GALLERY_ITEMS, setGalleryItems] = useState<GalleryItem[]>(() => {
     const saved = localStorage.getItem('gallery_items');
     return saved ? JSON.parse(saved) : RAW_GALLERY_ITEMS;
   });
-  const [TRANSPARENCY_DOCS, setTransparencyDocs] = useState(() => {
+  const [TRANSPARENCY_DOCS, setTransparencyDocs] = useState<TransparencyDoc[]>(() => {
     const saved = localStorage.getItem('transparency_docs');
     return saved ? JSON.parse(saved) : RAW_TRANSPARENCY_DOCS;
   });
@@ -321,7 +322,7 @@ export default function App() {
             subtitle="Dapatkan informasi berita terkini seputar kegiatan belajar, pengumuman ujian, serta artikel menarik."
           />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-6">
-            {NEWS_ITEMS.slice(0, 3).map((news) => (
+            {NEWS_ITEMS.slice(0, 3).map((news: NewsItem) => (
               <NewsCard key={news.id} news={news} />
             ))}
           </div>
@@ -416,7 +417,7 @@ export default function App() {
               subtitle="Sekolah dasar ramah anak dengan tradisi mengukir juara di bidang akademis dan non-akademis."
             />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6">
-              {ACHIEVEMENTS.slice(0, 4).map((ach) => (
+              {ACHIEVEMENTS.slice(0, 4).map((ach: Achievement) => (
                 <div key={ach.id} className="transform hover:scale-[1.02] transition-transform h-full">
                   <AchievementCard achievement={ach} />
                 </div>
@@ -545,7 +546,7 @@ export default function App() {
                 Misi Utama Sekolah:
               </h3>
               <ol className="space-y-3 text-slate-600 text-xs sm:text-sm">
-                {VISION_MISSION.mission.map((misi, idx) => (
+                {VISION_MISSION.mission.map((misi: string, idx: number) => (
                   <li key={idx} className="flex items-start">
                     <span className="bg-emerald-50 text-emerald-800 font-bold font-mono text-xs w-6 h-6 rounded-full flex items-center justify-center shrink-0 mr-3 mt-0.5">
                       {idx + 1}
@@ -564,7 +565,7 @@ export default function App() {
               Tujuan Jangka Menengah Sekolah (Indikator Kinerja):
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm text-slate-600">
-              {VISION_MISSION.goals.map((goal, idx) => (
+              {VISION_MISSION.goals.map((goal: string, idx: number) => (
                 <div key={idx} className="flex items-start space-x-2.5 bg-white p-3 rounded-xl border border-slate-100 shadow-sm">
                   <Check className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                   <span>{goal}</span>
