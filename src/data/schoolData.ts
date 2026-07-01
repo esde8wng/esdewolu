@@ -142,7 +142,7 @@ export const SCHOOL_CONFIG = {
   established: "1978",
   accreditation: "A (Unggul)",
   headmaster: {
-    name: "Sri Hartati, S.Pd., M.Pd.",
+    name: "Alfiah Dian Pratiwi, M.Pd.",
     nip: "19691208 199103 2 004",
     photo: "https://xmwidzrlxuwhlidyjqjn.supabase.co/storage/v1/object/public/esde8wng/WhatsApp%20Image%202026-07-01%20at%2010.50.37.jpeg",
     welcomeMessage: `Assalamu'alaikum Warahmatullahi Wabarakatuh,
