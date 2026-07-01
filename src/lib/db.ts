@@ -1,4 +1,4 @@
-import { supabase } from './supabase';
+import { supabase, isSupabaseReady } from './supabase';
 
 export type SchoolConfig = Record<string, any>;
 export type HeroSlide = Record<string, any>;
@@ -41,6 +41,7 @@ async function retry<T>(fn: () => Promise<T>, attempts = 2, delay = 500): Promis
 }
 
 async function getJSON<T>(table: string, key = 'main'): Promise<T | null> {
+  if (!isSupabaseReady) return null;
   try {
     const { data, error } = await withTimeout(
       Promise.resolve(supabase.from(table).select('data').eq('id', key).single())
@@ -54,6 +55,7 @@ async function getJSON<T>(table: string, key = 'main'): Promise<T | null> {
 }
 
 async function setJSON<T>(table: string, value: T, key = 'main') {
+  if (!isSupabaseReady) return;
   try {
     const { error } = await withTimeout(
       Promise.resolve(supabase.from(table).upsert({ id: key, data: value, updated_at: new Date().toISOString() }))
@@ -66,6 +68,7 @@ async function setJSON<T>(table: string, value: T, key = 'main') {
 }
 
 async function getAll<T>(table: string, orderBy = 'id'): Promise<T[]> {
+  if (!isSupabaseReady) return [];
   try {
     const { data, error } = await withTimeout(
       Promise.resolve(supabase.from(table).select('*').order(orderBy, { ascending: true }))
@@ -79,6 +82,7 @@ async function getAll<T>(table: string, orderBy = 'id'): Promise<T[]> {
 }
 
 async function insertOne<T extends { id?: any }>(table: string, value: T) {
+  if (!isSupabaseReady) throw new Error('Supabase not ready');
   try {
     const { data, error } = await withTimeout(
       Promise.resolve(supabase.from(table).insert(value).select().single())
@@ -92,6 +96,7 @@ async function insertOne<T extends { id?: any }>(table: string, value: T) {
 }
 
 async function clearTable(table: string) {
+  if (!isSupabaseReady) return;
   try {
     const { error } = await withTimeout(
       Promise.resolve(supabase.from(table).delete().neq('id', 0))

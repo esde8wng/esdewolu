@@ -77,10 +77,10 @@ export default function App() {
         cfgR, slidesR, quoteR, vmR, teachersR, facilitiesR, innovationsR,
         newsR, achievementsR, activitiesR, galleryR, docsR, servicesR
       ] = results;
-      if (cfgR.status === 'fulfilled' && cfgR.value) setSchoolConfig(cfgR.value as any);
+      if (cfgR.status === 'fulfilled' && cfgR.value) setSchoolConfig({ ...RAW_SCHOOL_CONFIG, ...cfgR.value } as any);
       if (slidesR.status === 'fulfilled' && slidesR.value.length) setHeroSlides(slidesR.value as any);
-      if (quoteR.status === 'fulfilled' && quoteR.value) setMotivationQuote(quoteR.value as any);
-      if (vmR.status === 'fulfilled' && vmR.value) setVisionMission(vmR.value as any);
+      if (quoteR.status === 'fulfilled' && quoteR.value) setMotivationQuote({ ...RAW_MOTIVATION_QUOTE, ...quoteR.value } as any);
+      if (vmR.status === 'fulfilled' && vmR.value) setVisionMission({ ...RAW_VISION_MISSION, ...vmR.value } as any);
       if (teachersR.status === 'fulfilled' && teachersR.value.length) setTeachers(teachersR.value as any);
       if (facilitiesR.status === 'fulfilled' && facilitiesR.value.length) setFacilities(facilitiesR.value as any);
       if (innovationsR.status === 'fulfilled' && innovationsR.value.length) setInnovations(innovationsR.value as any);
