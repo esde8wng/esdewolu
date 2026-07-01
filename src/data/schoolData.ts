@@ -144,7 +144,7 @@ export const SCHOOL_CONFIG = {
   headmaster: {
     name: "Sri Hartati, S.Pd., M.Pd.",
     nip: "19691208 199103 2 004",
-    photo: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80",
+    photo: "https://xmwidzrlxuwhlidyjqjn.supabase.co/storage/v1/object/public/esde8wng/WhatsApp%20Image%202026-07-01%20at%2010.50.37.jpeg",
     welcomeMessage: `Assalamu'alaikum Warahmatullahi Wabarakatuh,
     
     Salam sejahtera bagi kita semua. Rahayu.
