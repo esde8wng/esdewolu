@@ -435,19 +435,30 @@ export default function App() {
 
         {/* Banner CariYanlik (SIPPN) */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mt-8 mb-4">
+          <div className="text-center my-8">
             <a 
               href="https://sippn.menpan.go.id/" 
               target="_blank" 
               rel="noopener noreferrer" 
               title="Menuju SIPPN - CariYanlik"
-              className="inline-block"
+              className="inline-block group"
             >
-              <img 
-                src="https://menpan.go.id" 
-                alt="Banner CariYanlik KemenPAN-RB" 
-                className="max-w-full h-auto rounded-lg shadow-md hover:shadow-lg transition-shadow"
-              />
+              <div className="bg-gradient-to-r from-[#e31e65] to-[#c81452] rounded-xl shadow-lg hover:shadow-xl transition-all px-6 py-4 sm:px-8 sm:py-5 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/20 flex items-center justify-center border-2 border-white/40 shrink-0">
+                    <span className="text-white font-sans font-black text-lg sm:text-xl">c</span>
+                  </div>
+                  <div className="font-sans text-2xl sm:text-3xl tracking-tight text-left">
+                    <span className="text-white font-black">cari</span><span className="text-white/90 font-light">yanlik</span>
+                  </div>
+                </div>
+                <div className="hidden sm:block w-px h-8 bg-white/30"></div>
+                <div className="text-center sm:text-left">
+                  <p className="text-white font-bold text-xs sm:text-sm leading-tight">SIPPN - CariYanlik</p>
+                  <p className="text-white/80 text-[10px] sm:text-xs leading-tight">Sistem Informasi Pelayanan Publik Nasional</p>
+                </div>
+                <span className="bg-white text-[#e31e65] text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full mt-2 sm:mt-0 sm:ml-2 whitespace-nowrap">KemenPAN-RB</span>
+              </div>
             </a>
           </div>
         </div>
