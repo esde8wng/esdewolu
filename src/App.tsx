@@ -29,66 +29,71 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { AdminPanel } from './components/AdminPanel';
+import { db } from './lib/db';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('beranda');
   const [activeTab, setActiveTab] = useState('Semua');
   const [searchQuery, setSearchQuery] = useState('');
   const [isAdminOpen, setIsAdminOpen] = useState(false);
+  const [isDbReady, setIsDbReady] = useState(false);
 
-  // Reactive state for school CMS data, initialized from localStorage if edited
-  const [SCHOOL_CONFIG, setSchoolConfig] = useState<typeof RAW_SCHOOL_CONFIG>(() => {
-    const saved = localStorage.getItem('school_config');
-    return saved ? JSON.parse(saved) : RAW_SCHOOL_CONFIG;
-  });
-  const [HERO_SLIDES, setHeroSlides] = useState<HeroSlide[]>(() => {
-    const saved = localStorage.getItem('hero_slides');
-    return saved ? JSON.parse(saved) : RAW_HERO_SLIDES;
-  });
-  const [MOTIVATION_QUOTE, setMotivationQuote] = useState<Quote>(() => {
-    const saved = localStorage.getItem('motivation_quote');
-    return saved ? JSON.parse(saved) : RAW_MOTIVATION_QUOTE;
-  });
-  const [VISION_MISSION, setVisionMission] = useState<typeof RAW_VISION_MISSION>(() => {
-    const saved = localStorage.getItem('vision_mission');
-    return saved ? JSON.parse(saved) : RAW_VISION_MISSION;
-  });
-  const [TEACHERS, setTeachers] = useState<Teacher[]>(() => {
-    const saved = localStorage.getItem('teachers');
-    return saved ? JSON.parse(saved) : RAW_TEACHERS;
-  });
-  const [FACILITIES, setFacilities] = useState<Facility[]>(() => {
-    const saved = localStorage.getItem('facilities');
-    return saved ? JSON.parse(saved) : RAW_FACILITIES;
-  });
-  const [INNOVATIONS, setInnovations] = useState<Innovation[]>(() => {
-    const saved = localStorage.getItem('innovations');
-    return saved ? JSON.parse(saved) : RAW_INNOVATIONS;
-  });
-  const [NEWS_ITEMS, setNewsItems] = useState<NewsItem[]>(() => {
-    const saved = localStorage.getItem('news_items');
-    return saved ? JSON.parse(saved) : RAW_NEWS_ITEMS;
-  });
-  const [ACHIEVEMENTS, setAchievements] = useState<Achievement[]>(() => {
-    const saved = localStorage.getItem('achievements');
-    return saved ? JSON.parse(saved) : RAW_ACHIEVEMENTS;
-  });
-  const [ACTIVITIES, setActivities] = useState<Activity[]>(() => {
-    const saved = localStorage.getItem('activities');
-    return saved ? JSON.parse(saved) : RAW_ACTIVITIES;
-  });
-  const [GALLERY_ITEMS, setGalleryItems] = useState<GalleryItem[]>(() => {
-    const saved = localStorage.getItem('gallery_items');
-    return saved ? JSON.parse(saved) : RAW_GALLERY_ITEMS;
-  });
-  const [TRANSPARENCY_DOCS, setTransparencyDocs] = useState<TransparencyDoc[]>(() => {
-    const saved = localStorage.getItem('transparency_docs');
-    return saved ? JSON.parse(saved) : RAW_TRANSPARENCY_DOCS;
-  });
-  const [PUBLIC_SERVICES, setPublicServices] = useState<PublicServiceSop[]>(() => {
-    const saved = localStorage.getItem('public_services');
-    return saved ? JSON.parse(saved) : RAW_PUBLIC_SERVICES;
-  });
+  // Reactive state for school CMS data
+  const [SCHOOL_CONFIG, setSchoolConfig] = useState<typeof RAW_SCHOOL_CONFIG>(RAW_SCHOOL_CONFIG);
+  const [HERO_SLIDES, setHeroSlides] = useState<HeroSlide[]>(RAW_HERO_SLIDES);
+  const [MOTIVATION_QUOTE, setMotivationQuote] = useState<Quote>(RAW_MOTIVATION_QUOTE);
+  const [VISION_MISSION, setVisionMission] = useState<typeof RAW_VISION_MISSION>(RAW_VISION_MISSION);
+  const [TEACHERS, setTeachers] = useState<Teacher[]>(RAW_TEACHERS);
+  const [FACILITIES, setFacilities] = useState<Facility[]>(RAW_FACILITIES);
+  const [INNOVATIONS, setInnovations] = useState<Innovation[]>(RAW_INNOVATIONS);
+  const [NEWS_ITEMS, setNewsItems] = useState<NewsItem[]>(RAW_NEWS_ITEMS);
+  const [ACHIEVEMENTS, setAchievements] = useState<Achievement[]>(RAW_ACHIEVEMENTS);
+  const [ACTIVITIES, setActivities] = useState<Activity[]>(RAW_ACTIVITIES);
+  const [GALLERY_ITEMS, setGalleryItems] = useState<GalleryItem[]>(RAW_GALLERY_ITEMS);
+  const [TRANSPARENCY_DOCS, setTransparencyDocs] = useState<TransparencyDoc[]>(RAW_TRANSPARENCY_DOCS);
+  const [PUBLIC_SERVICES, setPublicServices] = useState<PublicServiceSop[]>(RAW_PUBLIC_SERVICES);
+
+  // Load data from Supabase in background without blocking render
+  useEffect(() => {
+    let cancelled = false;
+    async function load() {
+      const results = await Promise.allSettled([
+        db.schoolConfig.get(),
+        db.heroSlides.getAll(),
+        db.motivationQuote.get(),
+        db.visionMission.get(),
+        db.teachers.getAll(),
+        db.facilities.getAll(),
+        db.innovations.getAll(),
+        db.newsItems.getAll(),
+        db.achievements.getAll(),
+        db.activities.getAll(),
+        db.galleryItems.getAll(),
+        db.transparencyDocs.getAll(),
+        db.publicServices.getAll(),
+      ]);
+      if (cancelled) return;
+      const [
+        cfgR, slidesR, quoteR, vmR, teachersR, facilitiesR, innovationsR,
+        newsR, achievementsR, activitiesR, galleryR, docsR, servicesR
+      ] = results;
+      if (cfgR.status === 'fulfilled' && cfgR.value) setSchoolConfig(cfgR.value as any);
+      if (slidesR.status === 'fulfilled' && slidesR.value.length) setHeroSlides(slidesR.value as any);
+      if (quoteR.status === 'fulfilled' && quoteR.value) setMotivationQuote(quoteR.value as any);
+      if (vmR.status === 'fulfilled' && vmR.value) setVisionMission(vmR.value as any);
+      if (teachersR.status === 'fulfilled' && teachersR.value.length) setTeachers(teachersR.value as any);
+      if (facilitiesR.status === 'fulfilled' && facilitiesR.value.length) setFacilities(facilitiesR.value as any);
+      if (innovationsR.status === 'fulfilled' && innovationsR.value.length) setInnovations(innovationsR.value as any);
+      if (newsR.status === 'fulfilled' && newsR.value.length) setNewsItems(newsR.value as any);
+      if (achievementsR.status === 'fulfilled' && achievementsR.value.length) setAchievements(achievementsR.value as any);
+      if (activitiesR.status === 'fulfilled' && activitiesR.value.length) setActivities(activitiesR.value as any);
+      if (galleryR.status === 'fulfilled' && galleryR.value.length) setGalleryItems(galleryR.value as any);
+      if (docsR.status === 'fulfilled' && docsR.value.length) setTransparencyDocs(docsR.value as any);
+      if (servicesR.status === 'fulfilled' && servicesR.value.length) setPublicServices(servicesR.value as any);
+    }
+    load();
+    return () => { cancelled = true; };
+  }, []);
 
   // State for active public service tab
   const [activeServiceId, setActiveServiceId] = useState<number>(1);

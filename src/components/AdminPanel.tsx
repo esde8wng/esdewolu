@@ -8,6 +8,7 @@ import {
   HeroSlide, Teacher, Facility, Innovation, NewsItem, 
   Achievement, Activity, GalleryItem, TransparencyDoc, PublicServiceSop 
 } from '../data/schoolData';
+import { db } from '../lib/db';
 
 interface AdminPanelProps {
   isOpen: boolean;
@@ -110,8 +111,61 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
     }
   };
 
-  const saveToStorage = (key: string, data: any) => {
+  const saveToStorage = async (key: string, data: any) => {
     localStorage.setItem(key, JSON.stringify(data));
+    try {
+      switch (key) {
+        case 'school_config':
+          await db.schoolConfig.set(data);
+          break;
+        case 'hero_slides':
+          await db.heroSlides.replace(data);
+          break;
+        case 'motivation_quote':
+          await db.motivationQuote.set(data);
+          break;
+        case 'vision_mission':
+          await db.visionMission.set(data);
+          break;
+        case 'teachers':
+          await db.teachers.replace(data);
+          break;
+        case 'facilities':
+          await db.facilities.replace(data);
+          break;
+        case 'innovations':
+          await db.innovations.replace(data);
+          break;
+        case 'news_items':
+          await db.newsItems.replace(data);
+          break;
+        case 'achievements':
+          await db.achievements.replace(data);
+          break;
+        case 'activities':
+          await db.activities.replace(data);
+          break;
+        case 'gallery_items':
+          await db.galleryItems.replace(data);
+          break;
+        case 'transparency_docs':
+          await db.transparencyDocs.replace(data);
+          break;
+        case 'public_services':
+          await db.publicServices.replace(data);
+          break;
+        case 'faqs':
+          await db.faqs.replace(data);
+          break;
+        case 'quick_menu_items':
+          await db.quickMenuItems.replace(data);
+          break;
+        default:
+          break;
+      }
+    } catch (e) {
+      console.error('Failed to save to Supabase', e);
+    }
   };
 
   // Profile fields helper
