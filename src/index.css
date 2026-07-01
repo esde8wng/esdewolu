@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Map emerald color palette to deep school blue shades for the High Density theme */
+  --color-emerald-50: #eff6ff;
+  --color-emerald-100: #dbeafe;
+  --color-emerald-200: #bae6fd;
+  --color-emerald-300: #60a5fa;
+  --color-emerald-400: #3b82f6;
+  --color-emerald-500: #2563eb;
+  --color-emerald-600: #1d4ed8;
+  --color-emerald-700: #1e40af;
+  --color-emerald-800: #1e3a8a;
+  --color-emerald-900: #172554;
+  --color-emerald-950: #0f172a;
+}
+
+@layer utilities {
+  /* Custom Animations */
+  @keyframes slide {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .animate-slide {
+    animation: slide 3s infinite linear;
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 15s infinite linear;
+  }
+}
+
+/* Custom global styles for smooth scroll */
+html {
+  scroll-behavior: smooth;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

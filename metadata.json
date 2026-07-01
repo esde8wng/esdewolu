@@ -1,0 +1,6 @@
+{
+  "name": "SD Negeri 8 Wonogiri",
+  "description": "Website resmi SD Negeri 8 Wonogiri dengan arsitektur multi-page, menyajikan profil sekolah, kegiatan, prestasi, berita, transparansi, layanan publik, dan SPMB.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
